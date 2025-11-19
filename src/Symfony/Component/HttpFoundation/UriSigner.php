@@ -121,7 +121,15 @@ class UriSigner
 
     private function computeHash(string $uri): string
     {
-        return strtr(rtrim(base64_encode(hash_hmac('sha256', $uri, $this->secret, true)), '='), ['/' => '_', '+' => '-']);
+        return strtr(
+            rtrim(
+                base64_encode(
+                    hash_hmac('sha256', $uri, $this->secret, true)
+                ),
+                '='
+            ), 
+            ['/' => '_', '+' => '-']
+        );
     }
 
     private function buildUrl(array $url, array $params = []): string
